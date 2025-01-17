@@ -1,13 +1,13 @@
 # Hack The Box Walkthrough: Lame
-Difficulty: Easy
-Release Date: 14 Mar, 2017
-Author: Colm Carroll
+**Difficulty:** Easy
+**Release Date:** 14 Mar, 2017
+**Author:** Colm Carroll
 
-Prerequisites
+**Prerequisites**
 Tools used: nmap, smbmap, smbclient, metasploit
 
 
-Enumeration
+# Enumeration
 
 I used nmap -sVC -T4 Target IP to scan for open TCP ports. -sVC return additional output for each open port. -T4 speeds up the scan as it is more aggressive, 
 -T5 can be used but this can be too aggressive and miss some ports.
@@ -33,7 +33,7 @@ However, when I connect to this share using smbclient there is nothing of intere
 
 
 
-
+# Foothold
 
 Using msfconsole we can search for an exploit for SMB. I used the msfconsole command to start Metasploit. 
 
