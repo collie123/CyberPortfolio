@@ -1,6 +1,7 @@
 # Hack The Box Walkthrough: Active
 **Difficulty:** Easy  
 **Release Date:** 28 Jul, 2018
+
 **Author:** Colm Carroll
 
 
