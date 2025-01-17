@@ -1,8 +1,8 @@
 # Splunk IT
 
-**Challenge Name:** Splunk IT  
+**Challenge Name:** Anakus  
 **Difficulty Level:** Easy  
-**Category:** Splunk  
+**Category:** TimelineExplorer, SysInternals, Detect It Easy  
 
 **Scenario:**  
 One of the employees clicked on a malicious link and got the endpoint compromised. After executing malicious files and getting a foothold,  
