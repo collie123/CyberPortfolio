@@ -107,6 +107,41 @@ The total count can be seen at the bottom right which is 6
 
 **Answer**  6
 
+ **Q9)** What are the two “Rule Titles” with the highest count under the high-risk alerts level group—in respective order? (Format: Rule Title 1, Rule Title 2)
+
+ **A)** Seen as there is only 6 high events we can manually see that the most common Rule Titles are 
+ Important Log File Cleared, Important Windows Service Terminated With Error
+
+ **Answer** Important Log File Cleared, Important Windows Service Terminated With Error
+
+** Q10)** Examine the last “Rule Title” for the high-risk alerts level group: what MITRE ID does this correspond to and what is the TgtGrp in question? (Format: TechniqueID, TgtGrp)(2 points)
+
+
+**Q11)** Looking at the medium-risk level alerts, what is the “Rule Title” and count of the popular alert group? (Format: Rule Title, Count)(2 points)
+
+**A)** Now we can apply a filter to the alert column with 'med' as our filter. 
+Using the Rule Title column we can group these together by right clicking and selecting 'Group by this column' 
+This shows us our answer.
+
+![image](https://github.com/user-attachments/assets/a7e634c8-4fed-4844-9bec-bbf3af4d9ef2)
+
+**Answer** Potentially Malicious PwSh ,457
+
+**Q12)** What function was used for the password spray attack? Lists its MITRE ID for this type of attack as well (Format: powershell-function, TXXXX.xxx)(4 points)
+
+**A)** While the 'Potentially Malicious PwSh' is still grouped we can go to the very end which is the first Powershell command executed. 
+It shows the function Invoke-LocalPasswordSpray is used. If we search this on the Mitre Attack site we can see the ub-technique ID of T1110.
+
+![image](https://github.com/user-attachments/assets/ee3a8940-e789-4c57-b592-d0a6e9f05da6)
+
+**Answer** Invoke-LocalPasswordSpray, T1110
+
+
+
+
+
+
+
 
 
 
