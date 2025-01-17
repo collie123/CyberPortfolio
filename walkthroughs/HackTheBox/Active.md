@@ -1,3 +1,14 @@
+# Hack The Box Walkthrough: Active
+**Difficulty:** Easy  
+**Release Date:** 28 Jul, 2018
+**Author:** Colm Carroll
+
+
+## Prerequisites
+- Understaning Kerberos
+- Tools used: nmap, smbmap, smbclient, gpp-decrypt, hashcat, GetUserSPNs.py, wmiexec.py
+
+
 ## Enumeration 
 
 As always I started off by enumerating the target with an **nmap** scan. I use **-sVC** to gather additional information for each port that is open. 
@@ -45,7 +56,7 @@ We have Read Only access too much more shares now. If we navigate to the followi
 However, like earlier we can’t read the share in our SMB session so instead we can use get user.txt to download the file. Now we can read the user.txt file using the cat command. 
 
 
-## Administration Access
+## Privellege Escalation
 
 Another attack we can try is a **kerberoasting** attack. We can use the **GetUserSPNs.py** tool from **impacket** to execute this attack.
 We need to specify credentials and the target IP. We also include **-request** to request the TGS. This will get us the Administrator TGS. 
