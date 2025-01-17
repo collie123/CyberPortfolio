@@ -71,7 +71,7 @@ Now that we have the Administrator credentials we can try to authenticate with t
 
 ![image](https://github.com/user-attachments/assets/ffd458d2-4d16-482f-b67a-af16e3727255)
 
- If we cd to **\Users\Administrator\Desktop** we can see the **root.txt** file using the dir command. To read the contents of this file we can use the type command followed by root.txt.
+ If we cd to **\Users\Administrator\Desktop** we can see the **root.txt** file using the dir command. To read the contents of this file we can use the **type** command followed by root.txt.
  See the root flag highlighted below.
 
  ![image](https://github.com/user-attachments/assets/fd0b7599-663d-4e6c-af5e-1b376c01a43f)
