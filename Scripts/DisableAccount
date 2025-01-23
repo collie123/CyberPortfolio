@@ -1,0 +1,25 @@
+### This script will use input from a Microsoft Form and Disable the appropiate account ###
+
+
+
+param (
+    [Parameter(Mandatory = $true)]
+    [string]$Username
+)
+
+# Import the Active Directory module (ensure the AD module is installed on the system)
+Import-Module ActiveDirectory
+
+# Check if the username exists in Active Directory
+$User = Get-ADUser -Filter {SamAccountName -eq $Username}
+
+if ($null -ne $User) {
+    # Disable the user account
+    Disable-ADAccount -Identity $User.DistinguishedName
+
+    # Log success message
+    Write-Output "User account '$Username' has been successfully disabled."
+} else {
+    # Log error if user does not exist
+    Write-Output "Error: User account '$Username' does not exist in Active Directory."
+}
