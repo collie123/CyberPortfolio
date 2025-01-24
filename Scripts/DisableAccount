@@ -1,25 +1,81 @@
-### This script will use input from a Microsoft Form and Disable the appropiate account ###
-
-
-
-param (
-    [Parameter(Mandatory = $true)]
-    [string]$Username
-)
-
-# Import the Active Directory module (ensure the AD module is installed on the system)
+# Import required modules
 Import-Module ActiveDirectory
+Import-Module ImportExcel
+Import-Module ExchangeOnlineManagement
 
-# Check if the username exists in Active Directory
-$User = Get-ADUser -Filter {SamAccountName -eq $Username}
+# Define file and sheet paths
+$excelFilePath = "C:\Path\To\Movers and Leavers - Responses.xlsx"
+$leaversSheet = "Leavers"
+$moversSheet = "Movers"
+$currentDate = (Get-Date).ToString("MM/dd/yyyy") # Adjust format to match the date format in the Excel file
 
-if ($null -ne $User) {
-    # Disable the user account
-    Disable-ADAccount -Identity $User.DistinguishedName
+# Function to disable accounts for leavers
+Function Disable-LeaversAccount {
+    # Import leavers data
+    $leaversData = Import-Excel -Path $excelFilePath -WorksheetName $leaversSheet
 
-    # Log success message
-    Write-Output "User account '$Username' has been successfully disabled."
-} else {
-    # Log error if user does not exist
-    Write-Output "Error: User account '$Username' does not exist in Active Directory."
+    foreach ($leaver in $leaversData) {
+        if ($leaver.'Date Leaving/Moving' -eq $currentDate) {
+            $name = $leaver.'Name'
+            Write-Host "Disabling account for: $name"
+
+            # Disable account in Active Directory
+            Disable-ADAccount -Identity $name
+
+            # Add user to disabled list
+            $global:DisabledUsers += $name
+        }
+    }
 }
+
+# Function to remove access for movers
+Function Remove-MoversAccess {
+    # Import movers data
+    $moversData = Import-Excel -Path $excelFilePath -WorksheetName $moversSheet
+
+    foreach ($mover in $moversData) {
+        if ($mover.'Date Leaving/Moving' -eq $currentDate) {
+            $name = $mover.'Name'
+            $drives = $mover.'Drive Name' -split ';'
+            $sharedMailboxes = $mover.'Shared Mailbox' -split ';'
+
+            Write-Host "Processing access removal for: $name"
+
+            # Remove drive access
+            foreach ($drive in $drives) {
+                Write-Host "Removing access to drive: $drive"
+                # Example: Remove user from security group tied to drive
+                Remove-ADGroupMember -Identity $drive -Members $name -Confirm:$false
+            }
+
+            # Remove shared mailbox access
+            foreach ($mailbox in $sharedMailboxes) {
+                Write-Host "Removing access to shared mailbox: $mailbox"
+                # Ensure Exchange Online session is active
+                Remove-MailboxPermission -Identity $mailbox -User $name -AccessRights FullAccess -Confirm:$false
+            }
+        }
+    }
+}
+
+# Main logic
+# Global list to track disabled users
+$global:DisabledUsers = @()
+
+# Connect to Exchange Online (replace with actual credentials)
+Write-Host "Connecting to Exchange Online..."
+Connect-ExchangeOnline -UserPrincipalName "admin@yourdomain.com" -ShowProgress:$false
+
+# Execute functions
+Disable-LeaversAccount
+Remove-MoversAccess
+
+# Output disabled users
+Write-Host "The following users were disabled:" -ForegroundColor Green
+$global:DisabledUsers
+
+# Disconnect from Exchange Online
+Write-Host "Disconnecting from Exchange Online..."
+Disconnect-ExchangeOnline -Confirm:$false
+
+Write-Host "Script execution completed." -ForegroundColor Cyan
