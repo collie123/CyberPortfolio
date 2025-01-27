@@ -20,6 +20,9 @@ T1530 - Data from Cloud Storage
 **Question 1** - Looking at the CloudTrail Management Event logs, what was the TLS version used? (Format: TLSvX.X)
 After openening the CloudTrail Management Event logs I used the shortcut Ctrl + f and search for TLS. 
 
+After opening the CloudTrail Management Event we can use Ctrl + f to find TLS.
+
+
 ![image](https://github.com/user-attachments/assets/1771caee-1fbd-4675-a8f1-ce896fcde828)
 
 **Answer** - TLSv1.2
@@ -72,6 +75,7 @@ We can answer this using the image seen in question 5
 
 
 We can see the IP address in the access log 
+
 ![image](https://github.com/user-attachments/assets/0bbe9c42-2f4a-4044-9b1a-db04e8cad6bd)
 
 **Answer** -  85.115.53.202
