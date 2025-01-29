@@ -27,12 +27,8 @@ This resulted in a number of directories with a HTTP code of 301 ( this is a red
 ![image](https://github.com/user-attachments/assets/2dce1f75-ffae-431e-9c50-58444a3ec085)
 
 
-If we got to this URL we can see 2 files 'phpbash.min.php'	and 'phpbash.php'
+If we go to this URL we can see 2 files 'phpbash.min.php'	and 'phpbash.php'
 Clicking on either of these will immediatley give us a shell as the ww-data user.
-
-
-![image](https://github.com/user-attachments/assets/83e0aa8b-64b7-49ca-a7bc-251eb60662b1
-
 
 This is an interactive shell where we can navigate to the home directory.
 If we cd into the user arrexel we can see the user.txt flag here. 
