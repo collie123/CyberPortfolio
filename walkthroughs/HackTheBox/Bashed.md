@@ -13,8 +13,8 @@
 
 ## Enumeration 
 
-I started off by enumerating muy target with an nmap scan.
-I use -v so it will return the port number as soon as it is scanned. 
+I started off by enumerating my target with an nmap scan.
+I used -v so it will return the port number as soon as it is scanned. 
 I used -p- to scan all 65535 TCP ports. The result is that only port 80 is open.
 
 ![image](https://github.com/user-attachments/assets/ad661d5d-0cab-46f2-93d0-ac93bc3b7eb5)
@@ -22,13 +22,13 @@ I used -p- to scan all 65535 TCP ports. The result is that only port 80 is open.
 ## Web Fuzzing 
 
 I used common.txt found in /usr/share/dirb/wordlists/ to fuzz the target.
-This resulted in a couple of direcotries with a HTTP code of 301 ( this is a redirect ) 
+This resulted in a number of directories with a HTTP code of 301 ( this is a redirect ) 
 
 ![image](https://github.com/user-attachments/assets/2dce1f75-ffae-431e-9c50-58444a3ec085)
 
 
 If we got to this URL we can see 2 files 'phpbash.min.php'	and 'phpbash.php'
-Clicking on either of these will immediatley give us a shell as the ww-data user! 
+Clicking on either of these will immediatley give us a shell as the ww-data user.
 
 
 ![image](https://github.com/user-attachments/assets/83e0aa8b-64b7-49ca-a7bc-251eb60662b1
@@ -64,7 +64,7 @@ I navigated to the var/www/html/uploads folder and checked if we can use the wge
 
 We can use that command so now I will create the php reverse shell from my attacking machine.
 
-Using the locate command on my attacking Kali linux machine I was able to find the rverse shell
+Using the locate command on my attacking Kali linux machine I was able to find the reverse shell
 
 ![image](https://github.com/user-attachments/assets/a750842a-4b6d-4f79-add7-e116b640c770)
 
@@ -73,7 +73,7 @@ I used nano to change the IP address to my attacking machine's IP
 
 ![image](https://github.com/user-attachments/assets/cc0f3fc5-72ac-4f0f-9c3f-f4d1d0a3f498)
 
-Next I have started a web server on the attacking machine so we can use our target to dwonlaod this php-reverse-shell.php 
+Next I have started a web server on the attacking machine so we can use our target to downlaod this php-reverse-shell.php 
 
 ![image](https://github.com/user-attachments/assets/7a645662-e356-430b-8132-164d3cf16618)
 
@@ -84,7 +84,7 @@ After that I used ls to list the contents of the uploads folder and we can see o
 ![image](https://github.com/user-attachments/assets/29b23b7c-eb0d-4e2f-b87a-0836594b079d)
 
 So lets go to the uploads directory in the URL bar and execute our php reverse shell.
-Before we do this we need to set up a listener to catch the connection on the same port we used in our php-reverse-shell
+Before we do this we need to set up a netcat listener to catch the connection on the same port we used in our php-reverse-shell
 Below is the command for that and you can see we are now listening on port 8888 
 
 ![image](https://github.com/user-attachments/assets/9bbe4542-332c-408a-bb3e-9a2e2f3a2b23)
@@ -106,16 +106,15 @@ Using the below command we can switch to the scriptmnager
 
 ![image](https://github.com/user-attachments/assets/57ce9a4b-46c4-40c4-a3c1-5600309c900e)
 
-If we use the ls -la command we can see that the user scriptmanager ons the scripts directory.
+If we use the ls -la command we can see that the user scriptmanager owns the scripts directory.
 
 
 ![image](https://github.com/user-attachments/assets/f636a729-790a-4329-9baa-183356a0a813)
 
 When I go to the scipts folder there is 2 files, test.py and test.txt.
-It looks like the test.txt is been changed from a cron job which is scheduled every minute as we can say the change in time.
+It looks like the test.txt is been changed from a cron job which is scheduled every minute as we can see the change in time.
 
-Also if we have a look at the test.py file it is opening test.txt writing some data and closing it, so test.py can be cahnged to give us a shell as root 
-as this is the file been ran on a cron job. 
+Also if we have a look at the test.py file it is opening test.txt writing some data and closing it, so test.py can be changed to give us a shell as root as this is the file been ran on a cron job. 
 
 
 ![image](https://github.com/user-attachments/assets/42d93928-2d73-4606-8805-a530033b0fe5)
