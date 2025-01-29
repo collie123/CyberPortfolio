@@ -1,7 +1,3 @@
-## WORK IN PROGRESS
-
-
-
 # Hack The Box Walkthrough: Bashed
 **Difficulty:** Easy  
 **Release Date:** 09 Dec, 2017
@@ -126,6 +122,34 @@ as this is the file been ran on a cron job.
 ![image](https://github.com/user-attachments/assets/666ad8f3-1a5d-4526-89ba-afc432a738d5)
 
 ![image](https://github.com/user-attachments/assets/59cfe7c1-c0a4-4fcb-a884-2035eb2f0018)
+
+On the attacking machine I will create a file called exploit.py using nano.
+This will contain a script that will copy bash into root bash and cahnge the SUID bit on rootbash.
+A file with SUID always executes as the user who owns the file, in this case root is the owner. 
+
+
+![image](https://github.com/user-attachments/assets/8e90550c-b6d3-41a0-b368-b7e150cbb480)
+
+After I have created the exploit I started a web server on my attacking machine to send the file to the target.
+Then I renamed exploit.py to test.py so it would be triggered by the cron job.
+
+![image](https://github.com/user-attachments/assets/6622cbb8-403a-4efa-aa00-8d59b012cd6e)
+
+After I waited for a minute I could see root bash in the tmp directory with the s bit set.
+From there I used ./rootbash -p to become root. 
+
+![image](https://github.com/user-attachments/assets/3a52b77e-40b0-4983-b02b-2cc3132cc8f3)
+
+If we navigate to the root directory we can see the root.txt flag
+
+![image](https://github.com/user-attachments/assets/435b147a-6a39-4ace-8386-c3daa5e2c848)
+
+
+
+
+
+
+
 
 
 
