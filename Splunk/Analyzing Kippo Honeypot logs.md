@@ -23,7 +23,7 @@ Using ,] as a delimiter I can get the source IP
 
 ![image](https://github.com/user-attachments/assets/56157c9c-ff82-4df5-a84c-6610d41f55b8)
 
-I gave tghe report a name and then I was able to see the extracted field called SiourceIP in my logs 
+I gave the report a name and then I was able to see the extracted field called SourceIP in my logs 
 ![image](https://github.com/user-attachments/assets/61e7a0ce-7a2c-44e0-925f-83a324e026cd)
 
 ![image](https://github.com/user-attachments/assets/8c126b01-8eb9-4fda-8fa4-8512960722cf)
