@@ -1,0 +1,40 @@
+import pandas as pd 
+from collections import deque 
+ 
+# Define file path 
+file_path = r"C:\Users\Home\Downloads\Cowrie Commands Final.xlsx" 
+ 
+# Load the Excel file 
+df = pd.read_excel(file_path) 
+ 
+# Convert timestamp column to datetime format 
+df["@timestamp"] = pd.to_datetime(df["@timestamp"], format="%b %d, %Y @ %H:%M:%S.%f") 
+ 
+# Sort by timestamp 
+df = df.sort_values(by="@timestamp") 
+ 
+# Detect suspicious IPs 
+suspicious_ips = set() 
+ip_logs = {} 
+ 
+for index, row in df.iterrows(): 
+   ip = row["src_ip"] 
+   timestamp = row["@timestamp"] 
+ 
+   if ip not in ip_logs: 
+       ip_logs[ip] = deque() 
+ 
+   ip_logs[ip].append(timestamp) 
+   while ip_logs[ip] and (timestamp - ip_logs[ip][0]).total_seconds() > 1: 
+       ip_logs[ip].popleft() 
+ 
+   if len(ip_logs[ip]) >= 3: 
+       suspicious_ips.add(ip) 
+ 
+# Convert to DataFrame for saving 
+suspicious_df = pd.DataFrame(list(suspicious_ips), columns=["suspicious_ip"]) 
+ 
+# Save to CSV 
+suspicious_df.to_csv(r"C:\Users\Home\Desktop\suspicious_ips.csv", index=False) 
+ 
+print("File Saved!") 
