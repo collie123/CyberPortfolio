@@ -2,7 +2,7 @@
 
 # Overview
 
-I uploaded over 365 logs from the Kippo honeypot to Splunk. These logs were accumulated over 1 year and consists of over 11,000,000 events.
+I uploaded over 365 log files from the Kippo honeypot to Splunk. These logs were accumulated over 1 year and consists of over 11,000,000 events.
 Kippo lures attackers in by running a SSH service with weak credentials.
 
 I used Splunk to extract meaningful data from these logs such as Source IP addresses, source country and failed/successful credentials over SSH.
